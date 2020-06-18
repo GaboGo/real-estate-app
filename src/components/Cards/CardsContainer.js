@@ -1,0 +1,98 @@
+import React, { useState, useEffect } from 'react'
+import { Container, Col, Row, Pagination } from "react-bootstrap"
+import Card from "./Card"
+
+const CardsContainer = (props) => {
+    
+    const [currentPage, setCurrentPage] = useState(1)
+    const [cards, setCards] = useState([])
+
+    useEffect(()=>{
+        setCards(props.data && props.data.length > 0 ? props.data.map((card, i) => {  
+            return (
+               <Card key={card.id} info={card}></Card>
+            )
+        }): <span>No results were found</span> )
+    },[props.data])
+
+    const cardsPerPage = 12
+    let indexOfLastCard = currentPage * cardsPerPage
+    let indexOfFirstCard = indexOfLastCard - cardsPerPage
+    let currentCards = cards.length > 0 ? cards.slice(indexOfFirstCard, indexOfLastCard) : <span>No results were found</span>
+
+    // Logic for displaying page numbers
+    const pageNumbers = []
+    for (let i = 1; i <= Math.ceil(cards.length / cardsPerPage); i++) {
+      pageNumbers.push(i)
+    }
+
+    const renderPageNumbers = pageNumbers.map(number => {
+        return (
+            <Pagination.Item key={number} id={number} active={number === currentPage} onClick={() => {setCurrentPage(number)}}>
+                {number}
+            </Pagination.Item>
+        );
+    })
+
+    const renderPagination = () => {
+      if(currentCards.length > 0){
+        return (
+          <Pagination size="sm" className="justify-content-center align-items-center">
+            <Pagination.First onClick={() => {goFirstPage()}}/>
+            <Pagination.Prev onClick={() => {goPrevPage()}}/>
+            {renderPageNumbers}
+            <Pagination.Next onClick={() => {goNextPage()}}/>
+            <Pagination.Last onClick={() => {goLastPage()}}/>
+          </Pagination>
+        );
+      }
+    }
+
+    const goLastPage = () => {
+       setCurrentPage(pageNumbers[pageNumbers.length - 1])
+    }
+
+    const goFirstPage = () => {
+        setCurrentPage(pageNumbers[0])
+    }
+
+    const goNextPage = () => {
+        if(currentPage === pageNumbers.length){
+          setCurrentPage(pageNumbers[0])
+        } else {
+          setCurrentPage(currentPage + 1)
+        }  
+    }
+
+    const goPrevPage = () => {
+        if(currentPage === 1){
+          setCurrentPage(pageNumbers[pageNumbers.length - 1])
+        } else {
+          setCurrentPage(currentPage - 1)
+        }  
+    }
+
+    return (
+        <Container fluid={true}>
+          <Row className="d-flex justify-content-center align-items-center">
+            <Col lg={11}>
+                {renderPagination()}
+            </Col>
+          </Row>
+          <Row className="d-flex justify-content-center align-items-center">
+            <Col lg={11}>
+                <Container fluid={true} className="d-flex flex-wrap justify-content-center">
+                  {currentCards}
+                </Container>
+            </Col>
+          </Row>
+          <Row className="d-flex justify-content-center align-items-center">
+            <Col lg={11}>
+                {renderPagination()}
+            </Col>
+          </Row>
+      </Container>
+    );
+}
+
+export default CardsContainer

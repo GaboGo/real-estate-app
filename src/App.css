@@ -2,6 +2,36 @@
   text-align: center;
 }
 
+.card-container{
+  height: 500px;
+  width: 490px;
+  background-size: cover;
+  background-position: center;
+  margin: 20px 0px 0px 163px;
+  margin-left: 15px !important;
+  margin-right: 15px !important;
+}
+
+.card-img{
+  height: 250px;
+}
+
+.carousel-indicators {
+  bottom: 30px !important;
+}
+
+#page-numbers {
+  list-style: none;
+  display: flex;
+}
+
+#page-numbers > li {
+  margin-right: 0.3em;
+  color: blue;
+  user-select: none;
+  cursor: pointer;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
