@@ -11,18 +11,18 @@ const ImgCarousel = (props) => {
                 <img
                 className={`d-block w-100 ${props.detailed ? "detail-img" : "card-img"}`}
                 src={img}
-                alt={`Photo ${i}`}
+                alt={`Space ${i}`}
                 />
             </Carousel.Item>
           ) 
       }): <Carousel.Item className="w-100">
             <img 
-            alt="no-image" 
+            alt="no-space" 
             className="d-block w-100 card-img" 
             src={process.env.PUBLIC_URL + "/assets/no-image3.png"}
             />
          </Carousel.Item>)
-    },[props.images])
+    },[props.images,props.detailed])
 
     return (<Carousel className="d-flex w-100" indicators="true" interval={null} fade="true">{images}</Carousel>)
 }

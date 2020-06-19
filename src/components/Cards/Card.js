@@ -1,7 +1,7 @@
 import React from "react"
 import ImgCarousel from '../Carousel/Carousel'
 import CurrencyFormat from 'react-currency-format'
-import { Row, Col, Card } from "react-bootstrap"
+import { Row, Card } from "react-bootstrap"
 import { Link } from "react-router-dom";
 
 const Box = (props) => {
