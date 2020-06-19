@@ -10,15 +10,72 @@ The site constant with two pages, one is the homepage with the list of all prope
 
 The test requirements said that the layout could be a list or a grid, so I used a grid layout that shows the properties as cards organized by 2 per row, with a filter section and a pagination made by myself using bootstrap styling guide. By requirments only 12 cards per page must be displayed.
 
+![](Bs6J7zTQOr.gif)
+
 All cards have a carousel section to display all the properties images, this carousel section was created importing react-bootstrap/Carousel that brings the style and the logic of this component.
 
+![](eMqq8VFYXq.gif)
+
 The filter section have a dropdown to filter the regions and a checkboxes to filter by rooms, once a filter is applied a "reset filters" shows up.
+
+![](JuMC6iUmcI.gif)
 
 # Details page
 
 This page is accessible by clicking the bottom of any property card where the info is displayed, and it redirects you using react-router module to the clicked property detailed page. 
 
 This page have all the information I got from the API and is also reusing the carousel component to display all the images from the property, along with a map created importing 'react-leaflet' maps to display the location of the property.
+
+![](T8tqyNUyix.gif)
+
+## Components hierarchy
+
+    App
+    ├── Home
+    │   ├── FilterContainer
+    │   └── CardContainer
+    │       └── Card
+    │            └── Carousel
+    └── Details
+        ├── MapContainer
+        │   └── Map
+        └── Carousel
+    
+## Folder organization
+
+gabogo-aptuno-frontend
+    ├── .gitignore
+    ├── package.json
+    ├── public
+    │   ├── favicon.ico
+    │   ├── index.html
+    │   ├── manifest.json
+    │   ├── robots.txt
+    │   └── assets
+    │       └── no-image.png 
+    ├── README.md
+    ├── src
+    │   ├── App.css
+    │   ├── App.js
+    │   ├── App.test.js
+    │   ├── index.css
+    │   ├── index.js
+    │   ├── logo.svg
+    │   ├── serviceWorker.js
+    │   ├── components
+    │   │    ├── Cards 
+    │   │    │    ├── Card.js 
+    │   │    │    └── CardsContainer.js
+    │   │    ├── Carousel
+    │   │    │    └── Carousel.js
+    │   │    ├── Filters
+    │   │    │    └── FiltersContainer.js
+    │   │    └── Map
+    │   │         └── MapContainer.js
+    │   └── Pages
+    │        ├── Home.js
+    │        └── Details.js
+    └── yarn.lock
 
 ## Available Scripts
 
