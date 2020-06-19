@@ -9,13 +9,10 @@ const ImgCarousel = (props) => {
           return(
             <Carousel.Item className="w-100" key={i}>
                 <img
-                className="d-block w-100 card-img"
+                className={`d-block w-100 ${props.detailed ? "detail-img" : "card-img"}`}
                 src={img}
                 alt={`Photo ${i}`}
                 />
-                <Carousel.Caption>
-                <h3>Photo {i + 1}</h3>
-                </Carousel.Caption>
             </Carousel.Item>
           ) 
       }): <Carousel.Item className="w-100">

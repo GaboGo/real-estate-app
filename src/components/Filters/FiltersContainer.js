@@ -12,6 +12,7 @@ const FiltersContainer = (props) => {
         copy.region = e
         props.handleFiltersSelection(copy)
         setFilterApplied(true)
+        props.handleFilterApplied(true)
     }
 
     const handleBedrooms = (e) => {
@@ -19,11 +20,13 @@ const FiltersContainer = (props) => {
         if(e.target.checked){
           copy.bedrooms.push(e.target.id)
           setFilterApplied(true)
+          props.handleFilterApplied(true)
         } else {
           let index = copy.bedrooms.indexOf(e.target.id)
           index !== -1 && copy.bedrooms.splice(index, 1)
           if(copy.bedrooms.length === 0){
             setFilterApplied(false)
+            props.handleFilterApplied(true)
           }
         }
         props.handleFiltersSelection(copy)
@@ -33,6 +36,7 @@ const FiltersContainer = (props) => {
         let copy = {region : '', bedrooms : []}
         props.handleFiltersSelection(copy)
         setFilterApplied(false)
+        props.handleFilterApplied(false)
         formRef.current.reset()
     }
 
@@ -57,7 +61,7 @@ const FiltersContainer = (props) => {
     }
 
     return (
-        <Container className="d-flex flex-row d-flex justify-content-center" fluid={true}>
+        <Container className="d-flex flex-row justify-content-center" fluid={true}>
           <div className="p-4 d-flex flex-row bd-highlight mb-2">
                 <p className="p-2 bd-highlight">Filter By: </p>
                 <DropdownButton

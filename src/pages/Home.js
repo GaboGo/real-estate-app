@@ -1,22 +1,23 @@
 import React from 'react'
-import logo from '../logo.svg'
 import '../App.css'
 import CardsContainer from '../components/Cards/CardsContainer'
 import FiltersContainer from '../components/Filters/FiltersContainer'
 import {useState,useEffect} from 'react'
 
-function App() {
+function Home(props) {
   const [cards, setCards] = useState([])
   const [filters, setFilters] = useState({region : '', bedrooms : []});
   const [bckupCards, setBckupCards] = useState([])
   const [regions, setRegions] = useState([])
   const [bedrooms, setBedrooms] = useState([])
+  const [filterApplied, setFilterApplied] = useState(false)
   
   useEffect(()=>{
     fetch('https://raw.githubusercontent.com/aptuno/code-challenge/master/challenges/data/properties.json')
     .then(res => res.json())
     .then((data) => {
       setCards(data.data)
+      props.setCrds(data.data)
       setBckupCards(data.data)
       setRegions(() => {
          let regions = []
@@ -65,6 +66,7 @@ function App() {
         return card
       }
     })) 
+    props.setCrds(cards)
   },[filters])
 
   const handleFilters=(obj)=>{
@@ -72,16 +74,23 @@ function App() {
     setFilters(obj)
   }
 
+  const handleFilterApplied=(flag)=>{
+    console.log(flag)
+    setFilterApplied(flag)
+  }
+
   return (
-    <div className="App">
+    <div>
       <h1>List of properties</h1>
       <FiltersContainer regions={regions} 
                         bedrooms={bedrooms}
                         filters={filters} 
-                        handleFiltersSelection={handleFilters}/>
-      <CardsContainer data={cards}></CardsContainer>
+                        handleFiltersSelection={handleFilters}
+                        handleFilterApplied={handleFilterApplied}
+                        />
+      <CardsContainer filterApplied={filterApplied} data={cards}></CardsContainer>
     </div>
   );
 }
 
-export default App
+export default Home

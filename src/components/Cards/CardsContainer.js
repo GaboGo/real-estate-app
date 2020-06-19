@@ -15,6 +15,10 @@ const CardsContainer = (props) => {
         }): <span>No results were found</span> )
     },[props.data])
 
+    useEffect(()=>{
+      props.filterApplied && setCurrentPage(1)
+    },[props.filterApplied])
+
     const cardsPerPage = 12
     let indexOfLastCard = currentPage * cardsPerPage
     let indexOfFirstCard = indexOfLastCard - cardsPerPage
@@ -53,12 +57,12 @@ const CardsContainer = (props) => {
     }
 
     const goFirstPage = () => {
-        setCurrentPage(pageNumbers[0])
+        setCurrentPage(1)
     }
 
     const goNextPage = () => {
         if(currentPage === pageNumbers.length){
-          setCurrentPage(pageNumbers[0])
+          setCurrentPage(1)
         } else {
           setCurrentPage(currentPage + 1)
         }  
@@ -86,7 +90,7 @@ const CardsContainer = (props) => {
                 </Container>
             </Col>
           </Row>
-          <Row className="d-flex justify-content-center align-items-center">
+          <Row className="mt-4 d-flex justify-content-center align-items-center">
             <Col lg={11}>
                 {renderPagination()}
             </Col>

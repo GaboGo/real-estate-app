@@ -5,19 +5,29 @@
 .card-container{
   height: 500px;
   width: 490px;
-  background-size: cover;
-  background-position: center;
   margin: 20px 0px 0px 163px;
   margin-left: 15px !important;
   margin-right: 15px !important;
+  border: #282c34;
+}
+
+.detail-container{
+  height: 600px;
+  width: 70%;
+  margin: 0 auto;
 }
 
 .card-img{
   height: 250px;
 }
 
-.carousel-indicators {
-  bottom: 30px !important;
+.detail-img{
+  height: 400px;
+}
+
+.links {
+  text-decoration: none !important;
+  color: black !important;
 }
 
 #page-numbers {

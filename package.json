@@ -12,6 +12,7 @@
     "react-bootstrap-carousel": "^4.0.6",
     "react-currency-format": "^1.0.0",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
   "scripts": {
