@@ -1,30 +1,15 @@
 import React from "react"
 import ImgCarousel from '../components/Carousel/Carousel'
+import MapContainer from '../components/Map/MapContainer'
 import CurrencyFormat from 'react-currency-format'
 import { Row, Col, Container } from "react-bootstrap"
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import L from 'leaflet';
-
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-});
 
 const Details = ({ match, data }) => {
 
     let property = data.find(p => p.id == match.params.propertyId);
     let propertyData;
     
-    const mapStyles = {
-      height: "400px",
-      width: "100%"
-    };
-
     if (property) {
-      const position = [property.location.latitude, property.location.longitude]
 
       propertyData = (
         <div className="detail-container" key={property.id}>
@@ -54,15 +39,11 @@ const Details = ({ match, data }) => {
                 </Row>
             </Col>
             <div className="mt-3 mb-3">
-              <Map style={mapStyles} center={position} zoom={13}>
-                <TileLayer
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                  attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                />
-                <Marker position={position}>
-                  <Popup>{property.title}</Popup>
-                </Marker>
-              </Map>
+              <MapContainer 
+                latitud={property.location.latitude} 
+                longitud={property.location.longitude}
+                title={property.title}
+              />
             </div>
         </div>
       );
