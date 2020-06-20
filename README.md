@@ -2,7 +2,7 @@
 # gabogo-aptuno-frontend
 Website built in react that list properties available in Bogota, and metropolitan area.
 
-For the style I don't use any css preprocessor for this test, since I consider the test didn't required, to made the layout user friendly I imported react-bootstrap classes that also allows me to achive the responsive goal.
+For the style I don't use any css preprocessor for this test, since I consider the test didn't required, to made the layout user friendly I imported react-bootstrap classes that also allows me to achieve the responsive goal.
 
 The site constant with two pages, one is the homepage with the list of all properties availables and the other one is the detailed page for a single property selected.
 
