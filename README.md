@@ -1,8 +1,8 @@
 
 # gabogo-aptuno-frontend
-Website built in react that list properties available in Bogota, and metropolitain area.
+Website built in react that list properties available in Bogota, and metropolitan area.
 
-For the style I don't use any css preprocessor for this test, since I consider the test didn't required, to made the layout user friendly I imported react-bootstrap classes that also allows me to achive the responsive goal.
+For the style I don't use any css preprocessor for this test, since I consider the test didn't required, to made the layout user friendly I imported react-bootstrap classes that also allows me to achieve the responsive goal.
 
 The site constant with two pages, one is the homepage with the list of all properties availables and the other one is the detailed page for a single property selected.
 
@@ -10,15 +10,15 @@ The site constant with two pages, one is the homepage with the list of all prope
 
 The test requirements said that the layout could be a list or a grid, so I used a grid layout that shows the properties as cards organized by 2 per row, with a filter section and a pagination made by myself using bootstrap styling guide. By requirments only 12 cards per page must be displayed.
 
-![](eMqq8VFYXq.gif)
+![](JuMC6iUmcI.gif)
 
 All cards have a carousel section to display all the properties images, this carousel section was created importing react-bootstrap/Carousel that brings the style and the logic of this component.
 
-![](Bs6J7zTQOr.gif)
+![](eMqq8VFYXq.gif)
 
 The filter section have a dropdown to filter the regions and a checkboxes to filter by rooms, once a filter is applied a "reset filters" shows up.
 
-![](JuMC6iUmcI.gif)
+![](Bs6J7zTQOr.gif)
 
 # Details page
 
