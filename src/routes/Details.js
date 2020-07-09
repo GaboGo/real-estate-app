@@ -1,12 +1,13 @@
 import React from "react"
+import { connect } from 'react-redux'
 import ImgCarousel from '../components/Carousel/Carousel'
 import MapContainer from '../components/Map/MapContainer'
 import CurrencyFormat from 'react-currency-format'
 import { Row, Col, Container } from "react-bootstrap"
 
-const Details = ({ match, data }) => {
+const Details = (props) => {
 
-    let property = data.find(p => p.id == match.params.propertyId);
+    let property = props.data.find(p => p.id == props.match.params.propertyId);
     let propertyData;
     
     if (property) {
@@ -58,4 +59,8 @@ const Details = ({ match, data }) => {
     );
 };
 
-export default Details;
+const mapStateToProps = state => ({
+  data: state.data.items
+})
+
+export default connect(mapStateToProps)(Details)
