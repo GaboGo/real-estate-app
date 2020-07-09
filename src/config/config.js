@@ -1,0 +1,1 @@
+export const ApiUrl = 'https://raw.githubusercontent.com/aptuno/code-challenge/master/challenges/data/properties.json'

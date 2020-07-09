@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import Home from "./pages/Home"
-import Details from "./pages/Details"
+import Home from "./routes/Home"
+import Details from "./routes/Details"
 
 export default function App() {
 

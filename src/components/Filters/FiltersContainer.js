@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { setFilterApplied, setFilters } from '../../actions/actions'
 import { Container, Dropdown, DropdownButton, Form, Button } from "react-bootstrap"
 
 const FiltersContainer = (props) => {
 
-    const [filterApplied,setFilterApplied] = useState(false);
     const formRef = React.createRef()
     const checkRef  = React.createRef()
 
@@ -11,22 +12,19 @@ const FiltersContainer = (props) => {
         let copy = Object.assign({},props.filters)
         copy.region = e
         props.handleFiltersSelection(copy)
-        setFilterApplied(true)
-        props.handleFilterApplied(true)
+        props.setFilterApplied(true)
     }
 
     const handleBedrooms = (e) => {
         let copy = Object.assign({},props.filters)
         if(e.target.checked){
           copy.bedrooms.push(e.target.id)
-          setFilterApplied(true)
-          props.handleFilterApplied(true)
+          props.setFilterApplied(true)
         } else {
           let index = copy.bedrooms.indexOf(e.target.id)
           index !== -1 && copy.bedrooms.splice(index, 1)
           if(copy.bedrooms.length === 0){
-            setFilterApplied(false)
-            props.handleFilterApplied(true)
+            props.setFilterApplied(false)
           }
         }
         props.handleFiltersSelection(copy)
@@ -35,8 +33,7 @@ const FiltersContainer = (props) => {
     const handleResetFilters = () => {
         let copy = {region : '', bedrooms : []}
         props.handleFiltersSelection(copy)
-        setFilterApplied(false)
-        props.handleFilterApplied(false)
+        props.setFilterApplied(false)
         formRef.current.reset()
     }
 
@@ -53,7 +50,7 @@ const FiltersContainer = (props) => {
     })
 
     const RenderResetFiltersButton = () => {
-        if(filterApplied){
+        if(props.filterApplied){
             return (
                 <Button className=" d-flex flex-row align-self-center" onClick={handleResetFilters} variant="link">Reset Filters</Button>
              )
@@ -87,4 +84,16 @@ const FiltersContainer = (props) => {
     );
 }
 
-export default FiltersContainer
+const mapStateToProps = state => ({
+    filterApplied: state.filterApplied,
+    filters: state.filters,
+    regions: state.data.regions,
+    bedrooms: state.data.bedrooms
+})
+  
+const mapDispatchToProps = dispatch => ({
+    setFilterApplied: flag => dispatch(setFilterApplied(flag)),
+    handleFiltersSelection: obj => dispatch(setFilters(obj))
+})
+  
+export default connect(mapStateToProps, mapDispatchToProps)(FiltersContainer)

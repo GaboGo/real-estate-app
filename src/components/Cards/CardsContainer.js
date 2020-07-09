@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { Container, Col, Row, Pagination } from "react-bootstrap"
 import Card from "./Card"
 
@@ -99,4 +100,9 @@ const CardsContainer = (props) => {
     );
 }
 
-export default CardsContainer
+const mapStateToProps = state => ({
+  filterApplied: state.filterApplied,
+  data: state.data.items
+})
+
+export default connect(mapStateToProps)(CardsContainer)
