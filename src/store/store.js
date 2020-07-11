@@ -1,9 +1,9 @@
 import thunkMiddleware from 'redux-thunk'
 import { createStore, applyMiddleware } from 'redux'
-import appReducers from '../reducers/reducers'
-import { fetchData } from '../actions/actions'
+import rootReducer from '../reducers/RootReducer'
+import { fetchData } from '../actions/DataActions'
 
-const store = createStore(appReducers, applyMiddleware(thunkMiddleware))
+export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 store.dispatch(fetchData()).then(() => console.log(store.getState()))
 

@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux'
-import { SET_FILTERS, SET_FILTER_APPLIED, REQUEST_DATA, RECEIVE_DATA, UPDATE_DATA } from '../actions/actions'
+import { REQUEST_DATA, RECEIVE_DATA, UPDATE_DATA, SET_CURRENT_PAGE } from '../constants/constants'
 
 const getDataFiltered = (data, filters) => {
     return data.filter(card => {
@@ -41,20 +40,21 @@ const populateArray = (data, type) => {
     return array.sort()
 }
 
-function data(
+export function data(
     state = {
       isFetching: false,
       items: [],
       bckup: [],
       regions: [],
-      bedrooms: []
+      bedrooms: [],
+      currentPage: 1
     },
     action
 ){
     switch (action.type) {
       case REQUEST_DATA:
         return Object.assign({}, state, {
-          isFetching: true,
+          isFetching: action.flag,
         })
       case RECEIVE_DATA:
         return Object.assign({}, state, {
@@ -71,34 +71,11 @@ function data(
           items: getDataFiltered(state.bckup, action.filters),
           lastUpdated: action.receivedAt
         })
+      case SET_CURRENT_PAGE:
+        return Object.assign({}, state, {
+            currentPage: action.page,
+        })
       default:
         return state
     }
 }
-
-function filters(state = {region : '', bedrooms : []}, action) {
-    switch (action.type) {
-      case SET_FILTERS:
-        console.log(action.obj)
-        return action.obj
-      default:
-        return state
-    }
-}
-
-function filterApplied(state = false, action) {
-    switch (action.type) {
-      case SET_FILTER_APPLIED:
-        return action.flag
-      default:
-        return state
-    }
-}
-  
-const appReducers = combineReducers({
-    data,
-    filters,
-    filterApplied
-})
-  
-export default appReducers

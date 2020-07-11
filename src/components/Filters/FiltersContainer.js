@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setFilterApplied, setFilters } from '../../actions/actions'
+import { setFilterApplied, setFilters } from '../../actions/FiltersActions'
 import { Container, Dropdown, DropdownButton, Form, Button } from "react-bootstrap"
 
 const FiltersContainer = (props) => {

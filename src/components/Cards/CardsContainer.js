@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
+import { setCurrentPage } from '../../actions/DataActions'
 import { Container, Col, Row, Pagination } from "react-bootstrap"
 import Card from "./Card"
 
 const CardsContainer = (props) => {
     
-    const [currentPage, setCurrentPage] = useState(1)
     const [cards, setCards] = useState([])
 
     useEffect(()=>{
@@ -13,17 +13,17 @@ const CardsContainer = (props) => {
             return (
                <Card key={card.id} info={card}></Card>
             )
-        }): <span>No results were found</span> )
+        }): props.isFetching ? <span>Loading data...</span> : <span>No results were found</span> )
     },[props.data])
 
     useEffect(()=>{
-      props.filterApplied && setCurrentPage(1)
+      props.filterApplied && props.setCurrentPage(1)
     },[props.filterApplied])
 
     const cardsPerPage = 12
-    let indexOfLastCard = currentPage * cardsPerPage
+    let indexOfLastCard = props.currentPage * cardsPerPage
     let indexOfFirstCard = indexOfLastCard - cardsPerPage
-    let currentCards = cards.length > 0 ? cards.slice(indexOfFirstCard, indexOfLastCard) : <span>No results were found</span>
+    let currentCards = cards.length > 0 ? cards.slice(indexOfFirstCard, indexOfLastCard) : props.isFetching ? <span>Loading data...</span> : <span>No results were found</span>
 
     // Logic for displaying page numbers
     const pageNumbers = []
@@ -33,7 +33,7 @@ const CardsContainer = (props) => {
 
     const renderPageNumbers = pageNumbers.map(number => {
         return (
-            <Pagination.Item key={number} id={number} active={number === currentPage} onClick={() => {setCurrentPage(number)}}>
+            <Pagination.Item key={number} id={number} active={number === props.currentPage} onClick={() => {props.setCurrentPage(number)}}>
                 {number}
             </Pagination.Item>
         );
@@ -54,26 +54,26 @@ const CardsContainer = (props) => {
     }
 
     const goLastPage = () => {
-       setCurrentPage(pageNumbers[pageNumbers.length - 1])
+      props.setCurrentPage(pageNumbers[pageNumbers.length - 1])
     }
 
     const goFirstPage = () => {
-        setCurrentPage(1)
+      props.setCurrentPage(1)
     }
 
     const goNextPage = () => {
-        if(currentPage === pageNumbers.length){
-          setCurrentPage(1)
+        if(props.currentPage === pageNumbers.length){
+          props.setCurrentPage(1)
         } else {
-          setCurrentPage(currentPage + 1)
+          props.setCurrentPage(props.currentPage + 1)
         }  
     }
 
     const goPrevPage = () => {
-        if(currentPage === 1){
-          setCurrentPage(pageNumbers[pageNumbers.length - 1])
+        if(props.currentPage === 1){
+          props.setCurrentPage(pageNumbers[pageNumbers.length - 1])
         } else {
-          setCurrentPage(currentPage - 1)
+          props.setCurrentPage(props.currentPage - 1)
         }  
     }
 
@@ -102,7 +102,13 @@ const CardsContainer = (props) => {
 
 const mapStateToProps = state => ({
   filterApplied: state.filterApplied,
-  data: state.data.items
+  currentPage: state.data.currentPage,
+  data: state.data.items,
+  isFetching: state.data.isFetching
 })
 
-export default connect(mapStateToProps)(CardsContainer)
+const mapDispatchToProps = dispatch => ({
+  setCurrentPage: page => dispatch(setCurrentPage(page))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardsContainer)
