@@ -1,4 +1,5 @@
 import { ApiUrl } from "../config/config";
+import fetch from 'cross-fetch';
 import { REQUEST_DATA, RECEIVE_DATA, UPDATE_DATA, SET_CURRENT_PAGE } from '../constants/constants'
 
 export function requestData(flag) {

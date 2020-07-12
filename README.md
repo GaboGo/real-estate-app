@@ -1,6 +1,6 @@
 
 # gabogo-aptuno-frontend
-Website built in react that list properties available in Bogota, and metropolitan area.
+Website built in react/redux that list properties available in Bogota, and metropolitan area.
 
 For the style I don't use any css preprocessor for this test, since I consider the test didn't required, to made the layout user friendly I imported react-bootstrap classes that also allows me to achieve the responsive goal.
 
@@ -72,9 +72,22 @@ This page have all the information I got from the API and is also reusing the ca
     │   │    │    └── FiltersContainer.js
     │   │    └── Map
     │   │         └── MapContainer.js
-    │   └── Pages
-    │        ├── Home.js
-    │        └── Details.js
+    │   ├── routes
+    │   │    ├── Home.js
+    │   │    └── Details.js
+    │   ├── actions
+    │   │    ├── DataActions.js
+    │   │    └── FiltersActions.js
+    │   ├── reducers
+    │   │    ├── DataReducers.js
+    │   │    ├── FiltersReducers.js
+    │   │    └── RootReducers.js
+    │   ├── store
+    │   │    └── store.js
+    │   ├── constants
+    │   │    └── constants.js
+    │   └── config
+    │        └── config.js
     └── yarn.lock
 
 ## Available Scripts
