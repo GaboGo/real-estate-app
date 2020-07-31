@@ -16,14 +16,20 @@ const FiltersContainer = (props) => {
     }
 
     const handleBedrooms = (e) => {
-        let copy = Object.assign({},props.filters)
+        let copy = Object.assign({}, props.filters)
         if(e.target.checked){
-          copy.bedrooms.push(e.target.id)
+          copy = Object.assign({}, props.filters, {
+            bedrooms: [...props.filters.bedrooms, e.target.id]
+          })
           props.setFilterApplied(true)
         } else {
           let index = copy.bedrooms.indexOf(e.target.id)
-          index !== -1 && copy.bedrooms.splice(index, 1)
-          if(copy.bedrooms.length === 0){
+          if(index !== -1) {
+            copy = Object.assign({}, props.filters, {
+                bedrooms: props.filters.bedrooms.slice(0, index).concat(props.filters.bedrooms.slice(index + 1, props.filters.bedrooms.length))
+            })
+          }
+          if(copy.bedrooms.length === 0) {
             props.setFilterApplied(false)
           }
         }
