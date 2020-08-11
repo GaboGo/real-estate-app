@@ -27,12 +27,22 @@ export function updateData(filters) {
 }
   
 export function fetchData() {
-    return dispatch => {
+
+  return async dispatch => {
+    try {
       dispatch(requestData(true))
-      return fetch(ApiUrl)
-         .then(res => res.json())
-         .then((json) => {dispatch(receiveData(json))})
-         .catch(console.log("error"))
+      const res = await fetch(ApiUrl)
+
+      if(res.status >= 400) {
+        console.log("error")
+      }
+
+      const json = await res.json()
+
+      dispatch(receiveData(json))
+    } catch (err) {
+      console.log("error")
     }
+  }
 }
     
